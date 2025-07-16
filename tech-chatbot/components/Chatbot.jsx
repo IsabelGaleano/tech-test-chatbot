@@ -7,7 +7,9 @@ export default function ChatbotWidget() {
 
   const bottomRef = useRef(null)
 
-  const toggleChat = () => setChatOpen(!chatOpen)
+  const toggleChat = () => {
+    setChatOpen(!chatOpen)
+  }
 
   const sendMessage = async (e) => {
     e.preventDefault()
@@ -20,12 +22,10 @@ export default function ChatbotWidget() {
     })
 
     const data = await res.json()
-
     setMessages([...messages, { pregunta: input, respuesta: data.answer }])
     setInput('')
   }
 
-  // Scroll automático al último mensaje
   useEffect(() => {
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -47,7 +47,7 @@ export default function ChatbotWidget() {
         <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white border border-green-300 rounded-xl shadow-xl p-4 z-40 flex flex-col">
           {/* Header */}
           <div className="flex justify-between items-center mb-3">
-            <h4 className="text-green-800 font-bold text-lg">AnimalVenture Chatbot</h4>
+            <h4 className="text-green-800 font-bold text-lg">Coffee & Cats Chatbot</h4>
             <button
               onClick={toggleChat}
               className="text-green-500 hover:text-red-500"
@@ -56,23 +56,46 @@ export default function ChatbotWidget() {
             </button>
           </div>
 
-          {/* Lista de mensajes con scroll */}
-          <div className="flex-1 overflow-y-auto bg-green-50 rounded p-3 text-sm space-y-4">
+          {/* Lista de mensajes */}
+          <div className="flex-1 overflow-y-auto bg-green-50 rounded p-3 text-sm">
+            {/* Mensaje de bienvenida */}
+            <div className="flex justify-start items-start gap-2 mb-6">
+              <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">
+                <i className="fas fa-robot text-black" />
+              </div>
+              <div className="bg-white text-gray-800 p-2 rounded-xl max-w-[75%] border border-green-300 shadow">
+                ¡Hola! Soy tu guía en Coffee & Cats 🐾. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre horarios, precios o actividades.
+              </div>
+            </div>
+
+            {/* Conversación */}
             {messages.map((msg, i) => (
-              <div key={i}>
-                <div className="bg-green-200 text-green-900 p-2 rounded-xl w-fit mb-1 max-w-[90%]">
-                  <strong>Tú:</strong> {msg.pregunta}
+              <div key={i} className="mb-6">
+                {/* Usuario */}
+                <div className="flex justify-end items-start gap-2 mb-2">
+                  <div className="bg-green-200 text-green-900 p-2 rounded-xl max-w-[75%] shadow">
+                    <strong>Tú:</strong> {msg.pregunta}
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center font-bold">
+                    <i className="fas fa-user" />
+                  </div>
                 </div>
-                <div className="bg-white text-gray-800 p-2 rounded-xl w-fit max-w-[90%] border border-green-300 shadow">
-                  <strong>Bot:</strong> {msg.respuesta}
+
+                {/* Bot */}
+                <div className="flex justify-start items-start gap-2">
+                  <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">
+                    <i className="fas fa-robot text-black" />
+                  </div>
+                  <div className="bg-white text-gray-800 p-2 rounded-xl max-w-[75%] border border-green-300 shadow">
+                     {msg.respuesta}
+                  </div>
                 </div>
               </div>
             ))}
-            {/* Ancla invisible al final para hacer scroll automático */}
             <div ref={bottomRef}></div>
           </div>
 
-          {/* Input de mensaje */}
+          {/* Input */}
           <form onSubmit={sendMessage} className="flex gap-2 mt-3">
             <input
               type="text"

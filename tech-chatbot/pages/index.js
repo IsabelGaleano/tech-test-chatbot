@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
@@ -16,7 +15,7 @@ export default function Home() {
   return (
     <div className="bg-green-50">
       <Head>
-        <title>AnimalVenture - Earn with Animals</title>
+        <title>Coffee & Cats</title>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
