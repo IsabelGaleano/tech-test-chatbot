@@ -34,7 +34,6 @@ export default function ChatbotWidget() {
 
   return (
     <>
-      {/* Botón flotante */}
       <button
         onClick={toggleChat}
         className="fixed bottom-6 right-6 bg-green-700 hover:bg-green-800 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl z-50"
@@ -42,10 +41,9 @@ export default function ChatbotWidget() {
         <i className="fas fa-comment-dots"></i>
       </button>
 
-      {/* Ventana del chatbot */}
+ 
       {chatOpen && (
         <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white border border-green-300 rounded-xl shadow-xl p-4 z-40 flex flex-col">
-          {/* Header */}
           <div className="flex justify-between items-center mb-3">
             <h4 className="text-green-800 font-bold text-lg">Coffee & Cats Chatbot</h4>
             <button
@@ -56,9 +54,7 @@ export default function ChatbotWidget() {
             </button>
           </div>
 
-          {/* Lista de mensajes */}
           <div className="flex-1 overflow-y-auto bg-green-50 rounded p-3 text-sm">
-            {/* Mensaje de bienvenida */}
             <div className="flex justify-start items-start gap-2 mb-6">
               <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">
                 <i className="fas fa-robot text-black" />
@@ -68,10 +64,8 @@ export default function ChatbotWidget() {
               </div>
             </div>
 
-            {/* Conversación */}
             {messages.map((msg, i) => (
               <div key={i} className="mb-6">
-                {/* Usuario */}
                 <div className="flex justify-end items-start gap-2 mb-2">
                   <div className="bg-green-200 text-green-900 p-2 rounded-xl max-w-[75%] shadow">
                     <strong>Tú:</strong> {msg.pregunta}
@@ -81,7 +75,6 @@ export default function ChatbotWidget() {
                   </div>
                 </div>
 
-                {/* Bot */}
                 <div className="flex justify-start items-start gap-2">
                   <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">
                     <i className="fas fa-robot text-black" />
@@ -94,8 +87,6 @@ export default function ChatbotWidget() {
             ))}
             <div ref={bottomRef}></div>
           </div>
-
-          {/* Input */}
           <form onSubmit={sendMessage} className="flex gap-2 mt-3">
             <input
               type="text"
