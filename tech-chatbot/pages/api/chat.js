@@ -8,7 +8,15 @@ const elasticClient = new Client({
   serverless: true,
 });
 
-const translationClient = new TranslationServiceClient();
+
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+
+credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+
+const translationClient = new TranslationServiceClient({
+  credentials,
+});
+
 const projectId = process.env.GOOGLE_PROJECT_ID || 'translations-466100';
 const location = 'global';
 const parent = `projects/${projectId}/locations/${location}`;
