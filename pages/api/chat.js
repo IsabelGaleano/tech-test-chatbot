@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
 
     const result = await elasticClient.search({
-      index: 'coffee-cats-faq',
+      index: 'chatbot-faq-cats',
       query: {
         multi_match: {
           query: translatedQuestion,
